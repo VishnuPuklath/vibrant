@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vibrant/resources/auth_methods.dart';
 import 'package:vibrant/widgets/text_field_input.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,6 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
+  bool isLoading = false;
   @override
   void dispose() {
     super.dispose();
@@ -53,9 +55,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: 'Please enter your password',
                     textInputType: TextInputType.text,
                     isPass: true),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Log in'),
+                SizedBox(
+                  height: 19,
+                ),
+                Container(
+                  height: 50,
+                  width: 150,
+                  color: Colors.blue,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      logInUser();
+                    },
+                    child: isLoading
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text('Log in'),
+                  ),
                 ),
                 Flexible(
                   child: Container(),
@@ -70,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text('Dont you have an account?'),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: logInUser,
                           child: Container(
                             child: const Text('SignUp'),
                           ),
@@ -83,5 +99,26 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  logInUser() async {
+    setState(() {
+      isLoading = true;
+    });
+    String res = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
+    if (res == 'success') {
+    } else {
+      showSnackBar(res, context);
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  void showSnackBar(String content, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(content),
+    ));
   }
 }
