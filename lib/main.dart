@@ -5,6 +5,7 @@ import 'package:vibrant/responsive/mobile_screen_layou.dart';
 import 'package:vibrant/responsive/responsive_layout_screen.dart';
 import 'package:vibrant/responsive/web_screen_layout.dart';
 import 'package:vibrant/screens/login_screen.dart';
+import 'package:vibrant/screens/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(), // ResponsiveLayout(
+      home: SignUpScreen(), // ResponsiveLayout(
       //   mobileScreenLayout: MobileScreenLayout(),
       //   webScreenLayout: WebScreenLayout(),
     );

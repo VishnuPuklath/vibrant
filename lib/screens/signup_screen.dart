@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vibrant/widgets/text_field_input.dart';
 
-class LoginScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
+
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
-
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
   @override
   void dispose() {
     super.dispose();
     _emailController.clear();
     _passwordController.clear();
+    _bioController.clear();
+    _usernameController.clear();
   }
 
   @override
@@ -42,6 +45,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 30,
                 ),
                 TextFieldInput(
+                    textEditingController: _usernameController,
+                    hintText: 'Enter your username',
+                    textInputType: TextInputType.text),
+                const SizedBox(
+                  height: 30,
+                ),
+                TextFieldInput(
                     textEditingController: _emailController,
                     hintText: 'Please enter your email',
                     textInputType: TextInputType.emailAddress),
@@ -53,6 +63,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: 'Please enter your password',
                     textInputType: TextInputType.text,
                     isPass: true),
+                const SizedBox(
+                  height: 30,
+                ),
+                TextFieldInput(
+                    textEditingController: _bioController,
+                    hintText: 'Enter your bio',
+                    textInputType: TextInputType.text),
+                const SizedBox(
+                  height: 30,
+                ),
                 ElevatedButton(
                   onPressed: () {},
                   child: const Text('Log in'),
@@ -72,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         GestureDetector(
                           onTap: () {},
                           child: Container(
-                            child: const Text('SignUp'),
+                            child: Text('SignUp'),
                           ),
                         )
                       ]),
@@ -83,5 +103,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+    ;
   }
 }
