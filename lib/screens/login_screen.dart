@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vibrant/resources/auth_methods.dart';
+import 'package:vibrant/responsive/mobile_screen_layou.dart';
+import 'package:vibrant/responsive/responsive_layout_screen.dart';
+import 'package:vibrant/responsive/web_screen_layout.dart';
+import 'package:vibrant/screens/signup_screen.dart';
 import 'package:vibrant/widgets/text_field_input.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -86,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text('Dont you have an account?'),
                         ),
                         GestureDetector(
-                          onTap: logInUser,
+                          onTap: navigateToSignUp,
                           child: Container(
                             child: const Text('SignUp'),
                           ),
@@ -108,6 +112,11 @@ class _LoginScreenState extends State<LoginScreen> {
     String res = await AuthMethods().loginUser(
         email: _emailController.text, password: _passwordController.text);
     if (res == 'success') {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => ResponsiveLayout(
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout()),
+      ));
     } else {
       showSnackBar(res, context);
     }
@@ -119,6 +128,12 @@ class _LoginScreenState extends State<LoginScreen> {
   void showSnackBar(String content, BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(content),
+    ));
+  }
+
+  void navigateToSignUp() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => SignUpScreen(),
     ));
   }
 }
