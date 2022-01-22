@@ -59,6 +59,12 @@ class _AddPostScreenState extends State<AddPostScreen> {
         });
   }
 
+  void clearImage() {
+    setState(() {
+      _file = null;
+    });
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -82,15 +88,15 @@ class _AddPostScreenState extends State<AddPostScreen> {
             appBar: AppBar(
               backgroundColor: Colors.black,
               leading: IconButton(
-                  onPressed: postImage(user.uid, user.username, user.photoUrl),
-                  icon: Icon(Icons.arrow_back)),
+                  onPressed: clearImage, icon: Icon(Icons.arrow_back)),
               title: Text(
                 'Post It',
                 style: TextStyle(color: Colors.white),
               ),
               actions: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      postImage(user.uid, user.username, user.photoUrl),
                   child: Text(
                     'Post',
                     style: TextStyle(color: Colors.blueAccent, fontSize: 15),
@@ -102,7 +108,12 @@ class _AddPostScreenState extends State<AddPostScreen> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  isLoading ? LinearProgressIndicator() : Container(),
+                  isLoading
+                      ? const LinearProgressIndicator()
+                      : Padding(
+                          padding: EdgeInsets.only(top: 0),
+                        ),
+                  Divider(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,6 +169,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
         setState(() {
           isLoading = false;
         });
+        clearImage();
         showSnackBar('posted', context);
       } else {
         setState(() {
