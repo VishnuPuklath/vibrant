@@ -89,10 +89,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         Container(
                           child: Text('Dont you have an account?'),
                         ),
+                        SizedBox(width: 5),
                         GestureDetector(
                           onTap: navigateToSignUp,
                           child: Container(
-                            child: const Text('SignUp'),
+                            child: const Text(
+                              'SignUp',
+                              style: TextStyle(color: Colors.blueGrey),
+                            ),
                           ),
                         )
                       ]),
