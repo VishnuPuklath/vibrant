@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Container(
                             child: const Text(
                               'SignUp',
-                              style: TextStyle(color: Colors.blueGrey),
+                              style: TextStyle(color: Colors.purple),
                             ),
                           ),
                         )

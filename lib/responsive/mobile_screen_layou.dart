@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:vibrant/models/users.dart' as model;
 import 'package:vibrant/providers/user_provider.dart';
 import 'package:vibrant/screens/add_post_screen.dart';
+import 'package:vibrant/screens/feed_screen.dart';
 
 class MobileScreenLayout extends StatefulWidget {
   // const MobileScreenLayout({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class MobileScreenLayout extends StatefulWidget {
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   int selectedIndex = 0;
   List _pages = [
-    HomeScreen(),
+    FeedScreen(),
     SearchScreen(),
     AddPostScreen(),
     FavouriteScreen(),
